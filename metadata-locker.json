@@ -1,0 +1,1331 @@
+{
+  "compiler": {
+    "version": "0.8.30+commit.73712a01"
+  },
+  "language": "Solidity",
+  "output": {
+    "abi": [
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "poolManager_",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "deployer_",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "PoolId",
+            "name": "id",
+            "type": "bytes32"
+          }
+        ],
+        "name": "AlreadySeeded",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "owed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sent",
+            "type": "uint256"
+          }
+        ],
+        "name": "DustNotCovered",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "EmptyRange",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "factory",
+            "type": "address"
+          }
+        ],
+        "name": "FactoryAlreadyAdded",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "liquidity",
+            "type": "uint256"
+          }
+        ],
+        "name": "LiquidityOverflow",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NoLiquidity",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NotDeployer",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NotFactory",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NotFactoryAdmin",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NotPoolManager",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "PoolId",
+            "name": "id",
+            "type": "bytes32"
+          }
+        ],
+        "name": "NotSeeded",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NothingToCollect",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "implied",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "target",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint16",
+            "name": "toleranceBps",
+            "type": "uint16"
+          }
+        ],
+        "name": "OpeningPriceOffTarget",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "int256",
+            "name": "delta",
+            "type": "int256"
+          }
+        ],
+        "name": "QuoteSideTooLarge",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ReentrancyGuardReentrantCall",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "RefundFailed",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          }
+        ],
+        "name": "SafeERC20FailedOperation",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "int24",
+            "name": "tick",
+            "type": "int24"
+          },
+          {
+            "internalType": "int24",
+            "name": "tickSpacing",
+            "type": "int24"
+          }
+        ],
+        "name": "TickNotAligned",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "int24",
+            "name": "tick",
+            "type": "int24"
+          }
+        ],
+        "name": "TickOnWrongSide",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          }
+        ],
+        "name": "TokenAlreadySeeded",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "TokenNotInPool",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "owed",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "TokenSideTooLarge",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "UnexpectedValue",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ZeroAddress",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ZeroFactory",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ZeroFactoryAdmin",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ZeroSplitter",
+        "type": "error"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "PoolId",
+            "name": "id",
+            "type": "bytes32"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "splitter",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount0",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount1",
+            "type": "uint256"
+          }
+        ],
+        "name": "Collected",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "factory",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          }
+        ],
+        "name": "FactoryAdded",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "previous",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "next",
+            "type": "address"
+          }
+        ],
+        "name": "FactoryAdminSet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "PoolId",
+            "name": "id",
+            "type": "bytes32"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "splitter",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint160",
+            "name": "sqrtPriceX96",
+            "type": "uint160"
+          },
+          {
+            "indexed": false,
+            "internalType": "int24",
+            "name": "tickLower",
+            "type": "int24"
+          },
+          {
+            "indexed": false,
+            "internalType": "int24",
+            "name": "tickUpper",
+            "type": "int24"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint128",
+            "name": "liquidity",
+            "type": "uint128"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "tokensUsed",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "quoteDust",
+            "type": "uint256"
+          }
+        ],
+        "name": "Seeded",
+        "type": "event"
+      },
+      {
+        "inputs": [],
+        "name": "MAX_QUOTE_DUST",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "factory_",
+            "type": "address"
+          }
+        ],
+        "name": "addFactory",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "PoolId",
+            "name": "id",
+            "type": "bytes32"
+          }
+        ],
+        "name": "collect",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "amount0",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount1",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "deployer",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "factories",
+        "outputs": [
+          {
+            "internalType": "address[]",
+            "name": "",
+            "type": "address[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "factoryAdmin",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          }
+        ],
+        "name": "factoryAt",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "factoryCount",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "PoolId",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "factoryOf",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "isFactory",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          }
+        ],
+        "name": "poolKeyOf",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "Currency",
+                "name": "currency0",
+                "type": "address"
+              },
+              {
+                "internalType": "Currency",
+                "name": "currency1",
+                "type": "address"
+              },
+              {
+                "internalType": "uint24",
+                "name": "fee",
+                "type": "uint24"
+              },
+              {
+                "internalType": "int24",
+                "name": "tickSpacing",
+                "type": "int24"
+              },
+              {
+                "internalType": "contract IHooks",
+                "name": "hooks",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct PoolKey",
+            "name": "key",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "PoolId",
+            "name": "id",
+            "type": "bytes32"
+          }
+        ],
+        "name": "poolKeys",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "Currency",
+                "name": "currency0",
+                "type": "address"
+              },
+              {
+                "internalType": "Currency",
+                "name": "currency1",
+                "type": "address"
+              },
+              {
+                "internalType": "uint24",
+                "name": "fee",
+                "type": "uint24"
+              },
+              {
+                "internalType": "int24",
+                "name": "tickSpacing",
+                "type": "int24"
+              },
+              {
+                "internalType": "contract IHooks",
+                "name": "hooks",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct PoolKey",
+            "name": "key",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "poolManager",
+        "outputs": [
+          {
+            "internalType": "contract IPoolManager",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "poolOf",
+        "outputs": [
+          {
+            "internalType": "PoolId",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "PoolId",
+            "name": "id",
+            "type": "bytes32"
+          }
+        ],
+        "name": "positionKey",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "PoolId",
+            "name": "id",
+            "type": "bytes32"
+          }
+        ],
+        "name": "positionLiquidity",
+        "outputs": [
+          {
+            "internalType": "uint128",
+            "name": "",
+            "type": "uint128"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "PoolId",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "positions",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "splitter",
+            "type": "address"
+          },
+          {
+            "internalType": "int24",
+            "name": "tickLower",
+            "type": "int24"
+          },
+          {
+            "internalType": "int24",
+            "name": "tickUpper",
+            "type": "int24"
+          },
+          {
+            "internalType": "bool",
+            "name": "tokenIsCurrency0",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "components": [
+              {
+                "internalType": "Currency",
+                "name": "currency0",
+                "type": "address"
+              },
+              {
+                "internalType": "Currency",
+                "name": "currency1",
+                "type": "address"
+              },
+              {
+                "internalType": "uint24",
+                "name": "fee",
+                "type": "uint24"
+              },
+              {
+                "internalType": "int24",
+                "name": "tickSpacing",
+                "type": "int24"
+              },
+              {
+                "internalType": "contract IHooks",
+                "name": "hooks",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct PoolKey",
+            "name": "key",
+            "type": "tuple"
+          },
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "splitter",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "int24",
+            "name": "startTick",
+            "type": "int24"
+          },
+          {
+            "internalType": "uint256",
+            "name": "targetPriceX96",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint16",
+            "name": "toleranceBps",
+            "type": "uint16"
+          }
+        ],
+        "name": "seed",
+        "outputs": [
+          {
+            "internalType": "uint128",
+            "name": "liquidity",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokensUsed",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "PoolId",
+            "name": "id",
+            "type": "bytes32"
+          }
+        ],
+        "name": "seeded",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "next",
+            "type": "address"
+          }
+        ],
+        "name": "setFactoryAdmin",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+          }
+        ],
+        "name": "unlockCallback",
+        "outputs": [
+          {
+            "internalType": "bytes",
+            "name": "",
+            "type": "bytes"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ],
+    "devdoc": {
+      "errors": {
+        "ReentrancyGuardReentrantCall()": [
+          {
+            "details": "Unauthorized reentrant call."
+          }
+        ],
+        "SafeERC20FailedOperation(address)": [
+          {
+            "details": "An operation with an ERC-20 token failed."
+          }
+        ]
+      },
+      "events": {
+        "Seeded(bytes32,address,address,uint160,int24,int24,uint128,uint256,uint256)": {
+          "params": {
+            "quoteDust": "What the opening owed the pool in the quote, in its base units, and paid        from the factory's float: zero with the token as currency0."
+          }
+        }
+      },
+      "kind": "dev",
+      "methods": {
+        "seed((address,address,uint24,int24,address),address,address,uint256,int24,uint256,uint16)": {
+          "details": "Payable for one reason: when the quote is the native coin and the token is currency1,      the factory sends up to `MAX_QUOTE_DUST` wei of its float with this call. The pool is      paid exactly what the opening owes out of it and the rest goes back to the factory      before this returns. Value sent with any other seed is refused. With an ERC-20 quote      the factory approves this contract instead, and the callback pulls exactly what is      owed. Only the factory may call it, once per pool and once per token.",
+          "params": {
+            "amount": "The slice: how much of `token` the factory transferred here for this seed.        Whatever v4's rounding leaves of it stays here, with no code that can move it.",
+            "key": "The pool, with currencies already sorted and the fee already set.",
+            "splitter": "Where this pool's fees go, for good.",
+            "startTick": "The opening tick. Must be a multiple of `key.tickSpacing`, and on the        side of the range that leaves the position holding only tokens.",
+            "targetPriceX96": "The attested price as currency1-per-currency0, Q96-scaled.",
+            "token": "The launch's token: one of the key's currencies, never seeded before.",
+            "toleranceBps": "How far above the attested price the tick-aligned one may sit. It may        not sit below it at all."
+          }
+        },
+        "unlockCallback(bytes)": {
+          "details": "Reached only through this contract's own `unlock`: the PoolManager calls back whoever      unlocked it, and nobody else may call this."
+        }
+      },
+      "stateVariables": {
+        "MAX_QUOTE_DUST": {
+          "details": "`MAX_OPENING_DUST`, 1e17: see UniswapLaunchFactory and OpeningDust.sol. More than      this means the range is not where it should be, and the launch reverts. With the token      as currency0 the pool opens on `tickLower` and owes nothing."
+        }
+      },
+      "title": "LiquidityLocker",
+      "version": 1
+    },
+    "userdoc": {
+      "errors": {
+        "DustNotCovered(uint256,uint256)": [
+          {
+            "notice": "The native the factory sent does not cover what the opening owes."
+          }
+        ],
+        "TokenSideTooLarge(uint256,uint256)": [
+          {
+            "notice": "The pool asked for more of the token than this seed was handed. Never reached with         v4's own rounding; refused rather than paid out of what another seed left here."
+          }
+        ],
+        "UnexpectedValue(uint256)": [
+          {
+            "notice": "Native sent with a seed that cannot owe it -- an ERC-20 quote, or the token as         currency0 -- or more than any opening may owe. Refused rather than kept: this         contract has no code that could ever move it again."
+          }
+        ]
+      },
+      "kind": "user",
+      "methods": {
+        "MAX_QUOTE_DUST()": {
+          "notice": "The most of the quote asset, in its base units, an opening position may owe."
+        },
+        "addFactory(address)": {
+          "notice": "Add a factory that may open NEW pools or launches here. Append-only: no factory is         ever removed or replaced, and none can change a record already made."
+        },
+        "collect(bytes32)": {
+          "notice": "Sweep one pool's accrued fees to that pool's splitter. Permissionless -- the only         destination is the one recorded at the seed, so there is nothing to protect and the         creator never waits on the platform to press a button."
+        },
+        "deployer()": {
+          "notice": "May add a factory to the list that may seed NEW pools (`addFactory`). It can never         remove one, and no factory can touch a pool once it is seeded: a position is         written once, with the factory that seeded it, and nothing writes it again."
+        },
+        "factories()": {
+          "notice": "Every factory added, oldest first."
+        },
+        "factoryAdmin()": {
+          "notice": "May add a factory (and, on the hook, name who else may add liquidity)."
+        },
+        "factoryOf(bytes32)": {
+          "notice": "The factory that seeded each pool, recorded with its position."
+        },
+        "isFactory(address)": {
+          "notice": "Whether `factory` may act here."
+        },
+        "poolKeyOf(address)": {
+          "notice": "The key of the pool `token` was seeded into: where a launch's quote is recorded on         chain. Reverts for a token this locker never seeded."
+        },
+        "poolKeys(bytes32)": {
+          "notice": "A seeded pool's key. Reverts for a pool this locker never seeded."
+        },
+        "poolOf(address)": {
+          "notice": "The one pool each launch token was seeded into. Zero for a token never seeded."
+        },
+        "positionKey(bytes32)": {
+          "notice": "The v4 position key this locker holds `id`'s liquidity under."
+        },
+        "positionLiquidity(bytes32)": {
+          "notice": "The liquidity locked in `id`, as the PoolManager holds it. Zero for an unseeded pool."
+        },
+        "positions(bytes32)": {
+          "notice": "Each pool's position: (splitter, tickLower, tickUpper, tokenIsCurrency0)."
+        },
+        "seed((address,address,uint24,int24,address),address,address,uint256,int24,uint256,uint16)": {
+          "notice": "Open one launch's pool and lock `amount` of its token in as single-sided liquidity."
+        },
+        "seeded(bytes32)": {
+          "notice": "Whether `id` was seeded here."
+        },
+        "setFactoryAdmin(address)": {
+          "notice": "Hand the role to another key. The current admin only."
+        }
+      },
+      "notice": "Holds every launch's liquidity on one EVM chain, permanently: one contract, one         position per pool, and no way for anybody to take any of it out. ONE LOCKER, NOT ONE SEEDER PER LAUNCH. Each launch used to deploy its own UniswapV4Seeder: a five-kilobyte contract created, and its state written, inside every launch transaction, only to open one pool and then do nothing for ever. This is that contract's logic, kept, with the pool as a key rather than a deployment: the factory hands it the slice and the pool key, it opens the pool and adds the slice as one position it owns, and that is the last time the position's liquidity changes. A launch now writes one record here instead of deploying a contract. THE LOCK IS THE ABSENCE OF CODE. This contract owns every position, and there is no function anywhere in it that passes a negative `liquidityDelta`, moves a position, or hands one to anybody. There is no owner, no admin, no upgrade and no proxy. The two operations it performs on a pool are \"add at launch\", once per pool and only for the factory, and \"collect fees\", which anyone may call and whose only destination is the splitter recorded at the seed. A v4 position belongs to whoever called `modifyLiquidity` for it, so nothing but this contract can touch these positions -- and this contract cannot ask for less liquidity, because nothing in it can express that. The one setting it has is its list of factories (FactoryList): `deployer` may ADD one, never remove or replace one, and an added factory may seed NEW pools only. A pool is seeded once, by the factory recorded with it (`factoryOf`), and nothing writes its position again -- so a later factory reuses this locker and the hook that names it, and cannot touch any pool already here. The same rule as PangeaFeeHook's. EVERY POOL IS KEPT APART. Each pool's position is its own v4 position (the salt is the pool's id), its own record here, and its fees go to the splitter recorded for that pool at its seed -- `collect(id)` can send pool A's fees nowhere but A's splitter. Each launch's token is seeded into exactly one pool (`poolOf`), so the rounding dust a seed leaves behind, which stays here with no code that can move it, is that one pool's and nobody else's: a seed spends at most the amount it was handed for that pool (`TokenSideTooLarge`) and never reaches into what another launch left. Quote never rests here at all -- the opening's dust is paid from the factory's float straight to the pool, and native the pool did not ask for goes straight back. SINGLE-SIDED, AND PROVEN RATHER THAN ASSUMED. Unchanged from the seeder. The position sits on one side of the opening price, so it needs tokens and -- at most -- a dust of the quote asset, which is what lets 100% of supply go into liquidity with nothing held back. The callback asserts the quote side owes no more than `MAX_QUOTE_DUST`, so if the range were ever misplaced the launch reverts instead of demanding quote the factory does not have. WHICH SIDE DEPENDS ON TOKEN ORDERING. v4 sorts currencies by address, and price means currency1 per currency0. If the token sorts lower it is currency0, the price rises as the token appreciates, and the range sits above the opening price. If it sorts higher the price is inverted and the range sits below. A native-quoted pool is always the second: the native coin is address zero and sorts first. THE POSITION IS ACTIVE FROM THE FIRST BLOCK, ON BOTH SIDES. v4 counts a position as in range when `tickLower <= tick < tickUpper`. With the token as currency0 the pool opens on the range's lower tick, which is inside it. With the token as currency1 the range ends AT the opening tick, so that pool opens one unit of square-root price below it -- tick `startTick - 1`, inside the range, on the dear side of the attested price by about 1e-29 -- and the slice's liquidity is computed with that price as the top of what it fills. The position then owes the pool a dust of the quote for the sliver between the price and `tickUpper`: one base unit at any ordinary price, more for a quote worth very little per base unit (OpeningDust.sol). It is paid from a float the platform keeps in the factory, EXACTLY: the pool says what the position owes and this contract pays that -- pulling an ERC-20's from the factory, which has approved it up to `MAX_QUOTE_DUST`, or settling the native coin's out of what the factory sent with `seed` and returning the rest in the same call. Never the creator's, and not a trade. THE POOL HAS A HOOK, AND THIS CONTRACT DOES NOT CHOOSE IT. The key the factory hands `seed` names PangeaFeeHook, which lets nobody but this contract add liquidity, takes the whole fee at swap time and keeps the price inside the range. Nothing here checks which hook the key names -- the factory builds the key and is the only caller `seed` accepts -- so \"which hook\" is the factory's guarantee, not this contract's. FEES DO NOT ACCRUE HERE. The hook takes the whole fee at swap time and the pool's own fee is zero, so these positions earn nothing. `collect` is kept as a claim of last resort for a pool somehow created without the hook; on a normal launch it finds nothing, which the sweep already treats as success. THE OPENING PRICE IS TICK-ALIGNED, AND THE ERROR IS BOUNDED ON-CHAIN. The caller supplies the tick and this contract checks the price it implies against the attested one, reverting if the gap exceeds tolerance -- and never accepting one cheaper than attested (SingleSidedMath).",
+      "version": 1
+    }
+  },
+  "settings": {
+    "compilationTarget": {
+      "src/venues/LiquidityLocker.sol": "LiquidityLocker"
+    },
+    "evmVersion": "cancun",
+    "libraries": {},
+    "metadata": {
+      "bytecodeHash": "ipfs"
+    },
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "remappings": [
+      ":@layerzerolabs/lz-evm-protocol-v2/=lib/layerzero/protocol-v2/",
+      ":@layerzerolabs/oapp-evm/=lib/layerzero/oapp-evm/",
+      ":@layerzerolabs/oft-evm/=lib/layerzero/oft-evm/",
+      ":@openzeppelin/=lib/openzeppelin-contracts/",
+      ":@uniswap/v4-core/=lib/uniswap-v4-core/",
+      ":ds-test/=lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/",
+      ":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+      ":forge-std/=lib/forge-std/src/",
+      ":halmos-cheatcodes/=lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/",
+      ":layerzero/=lib/layerzero/",
+      ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+      ":solmate/=lib/solmate/",
+      ":uniswap-v4-core/=lib/uniswap-v4-core/src/"
+    ],
+    "viaIR": true
+  },
+  "sources": {
+    "lib/openzeppelin-contracts/contracts/interfaces/IERC1363.sol": {
+      "keccak256": "0x9b6b3e7803bc5f2f8cd7ad57db8ac1def61a9930a5a3107df4882e028a9605d7",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://da62d6be1f5c6edf577f0cb45666a8aa9c2086a4bac87d95d65f02e2f4c36a4b",
+        "dweb:/ipfs/QmNkpvBpoCMvX8JwAFNSc5XxJ2q5BXJpL5L1txb4QkqVFF"
+      ]
+    },
+    "lib/openzeppelin-contracts/contracts/interfaces/IERC165.sol": {
+      "keccak256": "0xde7e9fd9aee8d4f40772f96bb3b58836cbc6dfc0227014a061947f8821ea9724",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://11fea9f8bc98949ac6709f0c1699db7430d2948137aa94d5a9e95a91f61a710a",
+        "dweb:/ipfs/QmQdfRXxQjwP6yn3DVo1GHPpriKNcFghSPi94Z1oKEFUNS"
+      ]
+    },
+    "lib/openzeppelin-contracts/contracts/interfaces/IERC20.sol": {
+      "keccak256": "0xce41876e78d1badc0512229b4d14e4daf83bc1003d7f83978d18e0e56f965b9c",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://a2608291cb038b388d80b79a06b6118a42f7894ff67b7da10ec0dbbf5b2973ba",
+        "dweb:/ipfs/QmWohqcBLbcxmA4eGPhZDXe5RYMMEEpFq22nfkaUMvTfw1"
+      ]
+    },
+    "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol": {
+      "keccak256": "0xe06a3f08a987af6ad2e1c1e774405d4fe08f1694b67517438b467cecf0da0ef7",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://df6f0c459663c9858b6cba2cda1d14a7d05a985bed6d2de72bd8e78c25ee79db",
+        "dweb:/ipfs/QmeTTxZ7qVk9rjEv2R4CpCwdf8UMCcRqDNMvzNxHc3Fnn9"
+      ]
+    },
+    "lib/openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol": {
+      "keccak256": "0xca2ae13e0610f6a99238dd00b97bd786bc92732dae6d6b9d61f573ec51018310",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://75f8c71ce0c91c40dd5f249ace0b7d8270f8f1767231bcf71490f7157d6ba862",
+        "dweb:/ipfs/QmYXgxeDyFHvz3JsXxLEYN6GNUR44ThHeFj5XkpkgMoG4w"
+      ]
+    },
+    "lib/openzeppelin-contracts/contracts/utils/Address.sol": {
+      "keccak256": "0x9d8da059267bac779a2dbbb9a26c2acf00ca83085e105d62d5d4ef96054a47f5",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://c78e2aa4313323cecd1ef12a8d6265b96beee1a199923abf55d9a2a9e291ad23",
+        "dweb:/ipfs/QmUTs2KStXucZezzFo3EYeqYu47utu56qrF7jj1Gue65vb"
+      ]
+    },
+    "lib/openzeppelin-contracts/contracts/utils/Errors.sol": {
+      "keccak256": "0x6afa713bfd42cf0f7656efa91201007ac465e42049d7de1d50753a373648c123",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://ba1d02f4847670a1b83dec9f7d37f0b0418d6043447b69f3a29a5f9efc547fcf",
+        "dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB"
+      ]
+    },
+    "lib/openzeppelin-contracts/contracts/utils/ReentrancyGuardTransient.sol": {
+      "keccak256": "0x534bf5c25d6003a8ce50b400d20fa460c03169ad7baa90d47a912917c36dfe2b",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://cc0cc39c40ea23d3c46e8517e19ebdd877719d3159fa032f2a91802cdd205c79",
+        "dweb:/ipfs/QmSoNh7HTkD4TJcBkBKSGSPMMpLUZKE7s9f2G6mjdaJywg"
+      ]
+    },
+    "lib/openzeppelin-contracts/contracts/utils/TransientSlot.sol": {
+      "keccak256": "0x9303ef5a2beb555e52ce56598de205ce07ca8988fc67d073687c06cb8fc973d1",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://8b2e48fb42844c25e6cb38e7cfa1d91dcdc054613fd10f608833dbc677acf889",
+        "dweb:/ipfs/QmT4HQxbgpWA3fZnK4dY3eXHNCoyBvpvzNq5k7eSt5mR5t"
+      ]
+    },
+    "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol": {
+      "keccak256": "0x79796192ec90263f21b464d5bc90b777a525971d3de8232be80d9c4f9fb353b8",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://f6fda447a62815e8064f47eff0dd1cf58d9207ad69b5d32280f8d7ed1d1e4621",
+        "dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL"
+      ]
+    },
+    "lib/uniswap-v4-core/src/interfaces/IExtsload.sol": {
+      "keccak256": "0x80b53ca4907d6f0088c3b931f2b72cad1dc4615a95094d96bd0fb8dff8d5ba43",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://375c69148622aab7a3537d5fd37d373a8e9731022c8d87bdaee46233b0a99fe1",
+        "dweb:/ipfs/QmXFjdoYRxsA5B1kyuxEXgNf3FBoL1zPvy26Qy8EtpdFRN"
+      ]
+    },
+    "lib/uniswap-v4-core/src/interfaces/IExttload.sol": {
+      "keccak256": "0xc6b68283ebd8d1c789df536756726eed51c589134bb20821b236a0d22a135937",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://294394f72dfc219689209f4130d85601dfd0d63c8d47578050d312db70f9b6c8",
+        "dweb:/ipfs/QmTDMQ3oxCGHgEBU48a3Lp4S1rRjc8vVCxkhE5ZNej1bsY"
+      ]
+    },
+    "lib/uniswap-v4-core/src/interfaces/IHooks.sol": {
+      "keccak256": "0xc131ffa2d04c10a012fe715fe2c115811526b7ea34285cf0a04ce7ce8320da8d",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://3b212358897db5d99c21244d88f97b2e788527552cb430629b472a8cc6289aec",
+        "dweb:/ipfs/QmQtwV4dDe2RYk2ErLpaAX7U82jWh1L6Lw2HRuKDvBi84G"
+      ]
+    },
+    "lib/uniswap-v4-core/src/interfaces/IPoolManager.sol": {
+      "keccak256": "0xbdab3544da3d32dfdf7457baa94e17d5a3012952428559e013ffac45d067038e",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://ce95ff864468e37c76adf71df061d4f3d6f3a5ec1f9bc3aea090463bc72798f4",
+        "dweb:/ipfs/QmSbWh1pLbz51yQF4HEu5NRhr8XVv9JYGEw1hq1HudAnCi"
+      ]
+    },
+    "lib/uniswap-v4-core/src/interfaces/IProtocolFees.sol": {
+      "keccak256": "0x32a666e588a2f66334430357bb1e2424fe7eebeb98a3364b1dd16eb6ccca9848",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://85751d302125881f72e5f8af051c2d5d9b1f606ebaea8ca7d04fccdd27cc252d",
+        "dweb:/ipfs/QmeRwomeh9NWm6A6fgNA4KZPQZHPpdKsPQyYsHSFmvud7J"
+      ]
+    },
+    "lib/uniswap-v4-core/src/interfaces/callback/IUnlockCallback.sol": {
+      "keccak256": "0x58c82f2bd9d7c097ed09bd0991fedc403b0ec270eb3d0158bfb095c06a03d719",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://91168ca26a10980df2cdc3fbfe8ddf372c002b7ef19e3c59a0c9870d64198f1b",
+        "dweb:/ipfs/QmUSpaM825vd1SwvF38esgbdLgYiPwefKaFERTWvUi6uSK"
+      ]
+    },
+    "lib/uniswap-v4-core/src/interfaces/external/IERC20Minimal.sol": {
+      "keccak256": "0xeccadf1bf69ba2eb51f2fe4fa511bc7bb05bbd6b9f9a3cb8e5d83d9582613e0f",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://118757369892687b99ef46ce28d6861f62c098285bd7687a4f17f7e44e5f81de",
+        "dweb:/ipfs/QmUxqbYqQtcEwwFbb9e6BBMePEaSgN8C45v6RKubD4ib8d"
+      ]
+    },
+    "lib/uniswap-v4-core/src/interfaces/external/IERC6909Claims.sol": {
+      "keccak256": "0xa586f345739e52b0488a0fe40b6e375cce67fdd25758408b0efcb5133ad96a48",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://e8c557b7e52abdbbd82e415a1acc27921446a7fd090b7d4877e52be72619547f",
+        "dweb:/ipfs/QmXE2KNPbXmGX8BQF3ei6zhzRTnhoTQg39XmqMnkhbr6QK"
+      ]
+    },
+    "lib/uniswap-v4-core/src/libraries/BitMath.sol": {
+      "keccak256": "0x51b9be4f5c4fd3e80cbc9631a65244a2eb2be250b6b7f128a2035080e18aee8d",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://fe98bbd5498e912146b9319827fc63621eb66ff55d5baae0fa02a7a972ab8d1e",
+        "dweb:/ipfs/QmY5hCuyrtgsJtk4AavrxcvBkRrChfr4N6ZnhdC8roPpNi"
+      ]
+    },
+    "lib/uniswap-v4-core/src/libraries/CustomRevert.sol": {
+      "keccak256": "0x111ed3031b6990c80a93ae35dde6b6ac0b7e6af471388fdd7461e91edda9b7de",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://c9ea883c98d6ae1829160d0977bb5195761cfd5bc81692d0a941f45717f594cd",
+        "dweb:/ipfs/QmZPwxzaeMNv536wzrAMrMswu7vMHuqPVpjcqL3YvCMoxt"
+      ]
+    },
+    "lib/uniswap-v4-core/src/libraries/FixedPoint128.sol": {
+      "keccak256": "0xad236e10853f4b4b20a35a9bb52b857c4fc79874846b7e444e06ead7f2630542",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://0de1f9a06520b1a689660943faa14fc0b8344ab41fab9e6012ea34bff4b9b3eb",
+        "dweb:/ipfs/QmRNMPTyko7W6d6KxuTsnDBa9oZgDK4xiwRRq3H9ASTbwy"
+      ]
+    },
+    "lib/uniswap-v4-core/src/libraries/FullMath.sol": {
+      "keccak256": "0x4fc73a00817193fd3cac1cc03d8167d21af97d75f1815a070ee31a90c702b4c2",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://c3b2d66d36b1ad56b1ab6e2eb8a816740877b40b461c93f125e88621c8378e52",
+        "dweb:/ipfs/QmPGvMZzKQvNiWKd8aRzzdW7oAizwrMgcMtnaworDkVHFC"
+      ]
+    },
+    "lib/uniswap-v4-core/src/libraries/LiquidityMath.sol": {
+      "keccak256": "0x000ef2eadcc1eb7b2c18a77655f94e76e0e860f605783484657ef65fd6eda353",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://a766b620a7a22798b43c6c1f23b5c6cff0ebf588deb89842bad05208d448cd99",
+        "dweb:/ipfs/QmVKjaFJdzkqA3ey2Byum8iTCMssWVD8MmVC8rw62Tj5WD"
+      ]
+    },
+    "lib/uniswap-v4-core/src/libraries/Position.sol": {
+      "keccak256": "0xddab2a831f1befb6abf5567e77c4582169ca8156cf69eb4f22d8e87f7226a3f9",
+      "license": "BUSL-1.1",
+      "urls": [
+        "bzz-raw://c79fe61b50f3b70cff503abfa6f5643fcbefb9b794855bee1019b1e6d9c083b2",
+        "dweb:/ipfs/QmbKmYNQesaMz8bo1b7TMHQcAwaDd3eDPrE5pAdPPZTtk5"
+      ]
+    },
+    "lib/uniswap-v4-core/src/libraries/SafeCast.sol": {
+      "keccak256": "0x42c4a24f996a14d358be397b71f7ec9d7daf666aaec78002c63315a6ee67aa86",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://c3db86e2ba3679105fc32edec656c70282e1fede6cab11217702443f6c26fa59",
+        "dweb:/ipfs/QmX4yaaSPdKQzYNRsezjTvZKsubzS8JRTEGFD3fPpTTCcj"
+      ]
+    },
+    "lib/uniswap-v4-core/src/libraries/StateLibrary.sol": {
+      "keccak256": "0x96db333ee126a841dd959e38e452cc59d73583cb0437a1d48b2052e33a74f952",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://8672bba1eb69608299b0904f4ff305238eb18479d371c26518f278c9ee184cd0",
+        "dweb:/ipfs/QmTLu3s6ECvsEDHStQv8HTVHYtvkviBbdjPrFJd4SpVRFY"
+      ]
+    },
+    "lib/uniswap-v4-core/src/libraries/TickMath.sol": {
+      "keccak256": "0x4e1a11e154eb06106cb1c4598f06cca5f5ca16eaa33494ba2f0e74981123eca8",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://a79a57f7b240783b045168d1c4f774ac1812caf8f9a83cb6959a86b0b07b6c70",
+        "dweb:/ipfs/QmTb5kvxwDNW8jDuQaqdJ445cCFejNkUqEB17Bjo8UBiva"
+      ]
+    },
+    "lib/uniswap-v4-core/src/types/BalanceDelta.sol": {
+      "keccak256": "0xa719c8fe51e0a9524280178f19f6851bcc3b3b60e73618f3d60905d35ae5569f",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://7436928dc9de35c6c7c5c636cb51adaf295cfd590da83b19a004ae33cbec9ef9",
+        "dweb:/ipfs/QmRJ9yZkUpzk4433GX3LgVVL8jwpbSYSUwXcucKisf3v4H"
+      ]
+    },
+    "lib/uniswap-v4-core/src/types/BeforeSwapDelta.sol": {
+      "keccak256": "0x2a774312d91285313d569da1a718c909655da5432310417692097a1d4dc83a78",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://a2c7a0379955cff9c17ab9e61f95e42909aa5947c22740f86ce940d09856f782",
+        "dweb:/ipfs/QmaAuo8UBYXsGrVuKh8iRoAAdqwtg1jDq515cW1ZRP5m9K"
+      ]
+    },
+    "lib/uniswap-v4-core/src/types/Currency.sol": {
+      "keccak256": "0x4a0b84b282577ff6f8acf13ec9f4d32dbb9348748b49611d00e68bee96609c93",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://45f9d62ab3d51b52957279e353853ba1547c3182c9a1e3d1846ada4a90263b01",
+        "dweb:/ipfs/QmS8NG84ccQS1yXVD8cv3eKX7J1UKxuJhbUfHTQR2opKF5"
+      ]
+    },
+    "lib/uniswap-v4-core/src/types/PoolId.sol": {
+      "keccak256": "0x308311916ea0f5c2fd878b6a2751eb223d170a69e33f601fae56dfe3c5d392af",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://669c2cd7ac17690b5d8831e0bda72822376c3a04b36afed6d31df4d75fe60918",
+        "dweb:/ipfs/QmT6EpkxqU8VF3WsgrZ66F3s1cCQRffR95z1HDYZz7ph6y"
+      ]
+    },
+    "lib/uniswap-v4-core/src/types/PoolKey.sol": {
+      "keccak256": "0xf89856e0580d7a4856d3187a76858377ccee9d59702d230c338d84388221b786",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://6f3118fa189025695c37fdf0bdd1190f085ad097484d3c88cf4c56d1db65f639",
+        "dweb:/ipfs/QmamXpgtB8GV1CaFLvqefPWSoikLDhMk1yU4heBnVzU8gi"
+      ]
+    },
+    "lib/uniswap-v4-core/src/types/PoolOperation.sol": {
+      "keccak256": "0x7a1a107fc1f2208abb2c9364c8c54e56e98dca27673e9441bed2b949b6382162",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://4ad2470383bc5595d5af17840c64971f457adac68895a4db41ba5c71a4478e07",
+        "dweb:/ipfs/QmdwKhBHDZFuqXrR2BfDBD9r7rB2ULGQBznsajRTkTmL4c"
+      ]
+    },
+    "src/FactoryList.sol": {
+      "keccak256": "0xb50a39c15a4d8647b6f72a838dac25b874699852a2c49caeeaa24395f3c204b2",
+      "license": "UNLICENSED",
+      "urls": [
+        "bzz-raw://55630900275b74d087eb189d3c42b09b806921dcdc74de080a73b3a70219381a",
+        "dweb:/ipfs/QmUx6augYyAiLzyYFHc5dQcmCd3nwdTr8iwW4WRTKcJd5X"
+      ]
+    },
+    "src/venues/LiquidityLocker.sol": {
+      "keccak256": "0x2313cc00c3f36579e96caf473760262f430a3cf7991575f1f37909c54e84d4ad",
+      "license": "UNLICENSED",
+      "urls": [
+        "bzz-raw://eed6ba90101d3c35c9dc3b997d499c55e50aade3a55cb653227b62c59fa29918",
+        "dweb:/ipfs/QmQR9WhTxkxK7D9KrZkysKrnoWpQtA3r2EjGLpU7qiV59V"
+      ]
+    },
+    "src/venues/OpeningDust.sol": {
+      "keccak256": "0x05fde150896e9d43d22117525b529d9216b568112ddecd6bb83385cf93283358",
+      "license": "UNLICENSED",
+      "urls": [
+        "bzz-raw://2f84c2eff2f8cc35d4d6aa3bc4368239f8edbe7b08602cd723c061df402e9b38",
+        "dweb:/ipfs/QmPWat7ko8sU4NdYQLoEzobzQUQpTKeZEkWGPFy97nvpMT"
+      ]
+    },
+    "src/venues/SingleSidedMath.sol": {
+      "keccak256": "0xe69a5deab65968fcb747ee1a861fc22d84bed227f99330722c2f5ce8664ff72d",
+      "license": "UNLICENSED",
+      "urls": [
+        "bzz-raw://b092eec8380f4e56af0906092eb269d03c4d29ab8b561bf80567080035eba793",
+        "dweb:/ipfs/QmdQshqgY5JgRAFtmDfBdAnRdiLy3TYuCe4xDZFjeprkY8"
+      ]
+    }
+  },
+  "version": 1
+}

@@ -1,0 +1,13 @@
+@layerzerolabs/lz-evm-protocol-v2/=lib/layerzero/protocol-v2/
+@layerzerolabs/oapp-evm/=lib/layerzero/oapp-evm/
+@layerzerolabs/oft-evm/=lib/layerzero/oft-evm/
+@openzeppelin/=lib/openzeppelin-contracts/
+@uniswap/v4-core/=lib/uniswap-v4-core/
+ds-test/=lib/openzeppelin-contracts/lib/forge-std/lib/ds-test/src/
+erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/
+forge-std/=lib/forge-std/src/
+halmos-cheatcodes/=lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/
+layerzero/=lib/layerzero/
+openzeppelin-contracts/=lib/openzeppelin-contracts/
+solmate/=lib/solmate/
+uniswap-v4-core/=lib/uniswap-v4-core/src/
